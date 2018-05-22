@@ -227,7 +227,7 @@ class Videoitems(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(500),nullable=False)
     url = db.Column(db.String(100), nullable=False, index=True)
-    keywords = db.Column(db.String(100), nullable=False, index=True)
+    keywords = db.Column(db.String(100), nullable=False)
     tags = db.Column(db.String(1000),default=[])
     video_category = db.Column(db.String(50),default="其它")
     upload_time = db.Column(db.String(50))
@@ -238,3 +238,8 @@ class Videoitems(db.Model):
     isdownload = db.Column(db.Integer, default=0)
     play_count = db.Column(db.String(20), default="0")
     task_id = db.Column(db.String(20))
+
+
+class RunningJob(Base):
+    __tablename__ = 'running_job'
+    spider_random_id = db.Column(db.String(50),nullable=False,index=True)
