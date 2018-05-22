@@ -5,11 +5,11 @@ from SpiderKeeper.app import db, Base
 
 class Project(Base):
     __tablename__ = 'sk_project'
-
+    '''创建的工程表'''
     project_name = db.Column(db.String(50))
 
     @classmethod
-    def load_project(cls, project_list):
+    def load_project(cls, project_list):   #添加工程
         for project in project_list:
             existed_project = cls.query.filter_by(project_name=project.project_name).first()
             if not existed_project:
@@ -17,7 +17,7 @@ class Project(Base):
                 db.session.commit()
 
     @classmethod
-    def find_project_by_id(cls, project_id):
+    def find_project_by_id(cls, project_id):   #查询工程
         return Project.query.filter_by(id=project_id).first()
 
     def to_dict(self):
@@ -29,7 +29,7 @@ class Project(Base):
 
 class SpiderInstance(Base):
     __tablename__ = 'sk_spider'
-
+    '''爬虫表'''
     spider_name = db.Column(db.String(100))
     project_id = db.Column(db.INTEGER, nullable=False, index=True)
 
@@ -101,7 +101,7 @@ class JobRunType():
 
 class JobInstance(Base):
     __tablename__ = 'sk_job_instance'
-
+    '''爬虫任务表'''
     spider_name = db.Column(db.String(100), nullable=False, index=True)
     project_id = db.Column(db.INTEGER, nullable=False, index=True)
     tags = db.Column(db.Text)  # job tag(split by , )
@@ -221,3 +221,21 @@ class JobExecution(Base):
             hour_key = job_execution.create_time.strftime('%Y-%m-%d %H:00:00')
             result[hour_key] += 1
         return [dict(key=hour_key, value=result[hour_key]) for hour_key in hour_keys]
+
+class Videoitems(db.Model):
+    __tablename__ = 'videoitems'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(500),nullable=False)
+    url = db.Column(db.String(100), nullable=False, index=True)
+    keywords = db.Column(db.String(100), nullable=False, index=True)
+    tags = db.Column(db.String(1000),default=[])
+    video_category = db.Column(db.String(50),default="其它")
+    upload_time = db.Column(db.String(50))
+    spider_time = db.Column(db.String(50))
+    info = db.Column(db.text)
+    site_name = db.Column(db.String(20), default="")
+    video_time = db.Column(db.Integer(11), default=0)
+    isdownload = db.Column(db.Integer(5), default=0)
+    play_count = db.Column(db.String(20), default="0")
+    enabled = db.Column(db.INTEGER, default=0)
+    task_id = db.Column(db.String(20))
