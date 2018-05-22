@@ -8,7 +8,8 @@ DEBUG = True
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.path.abspath('.'), 'SpiderKeeper.db')
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(os.path.abspath('.'), 'SpiderKeeper.db')
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@10.168.103.90:3306/spiderkeeper'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 DATABASE_CONNECT_OPTIONS = {}
 

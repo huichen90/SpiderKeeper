@@ -149,10 +149,10 @@ class SpiderStatus():
 
 class JobExecution(Base):
     __tablename__ = 'sk_job_execution'
-
+    '''记录爬虫的执行情况'''
     project_id = db.Column(db.INTEGER, nullable=False, index=True)
-    service_job_execution_id = db.Column(db.String(50), nullable=False, index=True)
-    job_instance_id = db.Column(db.INTEGER, nullable=False, index=True)
+    service_job_execution_id = db.Column(db.String(50), nullable=False, index=True) #服务器作业执行ID
+    job_instance_id = db.Column(db.INTEGER, nullable=False, index=True)  #作业实例ID
     create_time = db.Column(db.DATETIME)
     start_time = db.Column(db.DATETIME)
     end_time = db.Column(db.DATETIME)
