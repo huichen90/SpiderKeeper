@@ -121,10 +121,12 @@ class SpiderAgent():
     def start_spider(self, job_instance):
         project = Project.find_project_by_id(job_instance.project_id)
         spider_name = job_instance.spider_name
+        taskId = job_instance.id
         arguments = {}
         if job_instance.spider_arguments:
             arguments = dict(map(lambda x: x.split("="), job_instance.spider_arguments.split(",")))
         threshold = 0
+        arguments['taskId'] = taskId   #将任务id加入到爬虫
         daemon_size = len(self.spider_service_instances)
         if job_instance.priority == JobPriority.HIGH:
             threshold = int(daemon_size / 2)
