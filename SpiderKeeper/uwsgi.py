@@ -4,7 +4,7 @@
 # @Author    : modm
 '''
 you can start the server by uwsgi
-like gunicorn -w 4 SpiderKeeper.uwsgi:app
+like gunicorn -w 4 -b 0.0.0.0:8000 SpiderKeeper.uwsgi:app
 '''
 from SpiderKeeper.app import app, initialize
 
