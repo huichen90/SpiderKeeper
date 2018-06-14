@@ -9,7 +9,7 @@ class Project(Base):
     project_name = db.Column(db.String(50))
 
     @classmethod
-    def load_project(cls, project_list):   #添加工程
+    def load_project(cls, project_list):   # 添加工程
         for project in project_list:
             existed_project = cls.query.filter_by(project_name=project.project_name).first()
             if not existed_project:
@@ -17,7 +17,7 @@ class Project(Base):
                 db.session.commit()
 
     @classmethod
-    def find_project_by_id(cls, project_id):   #查询工程
+    def find_project_by_id(cls, project_id):   # 查询工程
         return Project.query.filter_by(id=project_id).first()
 
     def to_dict(self):
@@ -151,8 +151,8 @@ class JobExecution(Base):
     __tablename__ = 'sk_job_execution'
     '''记录爬虫的执行情况'''
     project_id = db.Column(db.INTEGER, nullable=False, index=True)
-    service_job_execution_id = db.Column(db.String(50), nullable=False, index=True) #服务器作业执行ID
-    job_instance_id = db.Column(db.INTEGER, nullable=False, index=True)  #作业实例ID
+    service_job_execution_id = db.Column(db.String(50), nullable=False, index=True)  # 服务器作业执行ID
+    job_instance_id = db.Column(db.INTEGER, nullable=False, index=True)  # 作业实例ID
     create_time = db.Column(db.DATETIME)
     start_time = db.Column(db.DATETIME)
     end_time = db.Column(db.DATETIME)
