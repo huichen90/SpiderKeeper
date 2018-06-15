@@ -102,6 +102,8 @@ class JobRunType():
 class JobInstance(Base):
     __tablename__ = 'sk_job_instance'
     '''爬虫任务表'''
+    job_name = db.Column(db.String(50)) # 任务名称
+    spider_type = db.Column(db.String(50))  # 采集形式
     spider_name = db.Column(db.String(100), nullable=False, index=True)
     project_id = db.Column(db.INTEGER, nullable=False, index=True)
     tags = db.Column(db.Text)  # job tag(split by , )
@@ -119,6 +121,8 @@ class JobInstance(Base):
     def to_dict(self):
         return dict(
             job_instance_id=self.id,
+            job_name = self.job_name,
+            spider_type = self.spider_type,
             spider_name=self.spider_name,
             tags=self.tags.split(',') if self.tags else None,
             spider_arguments=self.spider_arguments,

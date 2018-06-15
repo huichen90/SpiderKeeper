@@ -548,6 +548,11 @@ def job_add(project_id):
     project = Project.find_project_by_id(project_id)
     job_instance = JobInstance()
     job_instance.spider_name = request.form['spider_name']
+    job_instance.tags = request.form['tags']
+    job_instance.job_name = request.form['job_name']
+    print(job_instance.spider_name)
+    job_instance.spider_type = request.form['spider_type']
+    print(job_instance.tags)
     job_instance.project_id = project_id
     job_instance.spider_arguments = request.form['spider_arguments']
     job_instance.priority = request.form.get('priority', 0)
