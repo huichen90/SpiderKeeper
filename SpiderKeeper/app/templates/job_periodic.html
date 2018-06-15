@@ -23,9 +23,10 @@
         <table class="table table-striped">
             <tr>
                 <th style="width: 10px">#</th>
-                <th style="width: 30px">Month</th>
-                <th style="width: 30px">Day of Month</th>
-                <th style="width: 30px">Day of Week</th>
+                <th style="width: 50px">Job name</th>
+                <th style="width: 10px">Month</th>
+                <th style="width: 10px">Day of Month</th>
+                <th style="width: 10px">Day of Week</th>
                 <th style="width: 30px">Hour</th>
                 <th style="width: 30px">Minutes</th>
                 <th style="width: 40px">Spider</th>
@@ -33,11 +34,12 @@
                 <th style="width: 100px">Args</th>
                 <th style="width: 40px">Tags</th>
                 <th style="width: 40px">Enabled</th>
-                <th style="width: 100px">Action</th>
+                <th style="width: 50px">Action</th>
             </tr>
             {% for job_instance in job_instance_list %}
             <tr>
                 <td><a name="{{ job_instance.job_instance_id }}">{{ job_instance.job_instance_id }}</a></td>
+                <td>{{ job_instance.job_name }}</td>
                 <td>{{ job_instance.cron_month }}</td>
                 <td>{{ job_instance.cron_day_of_month }}</td>
                 <td>{{ job_instance.cron_day_of_week }}</td>
@@ -101,6 +103,26 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label>Job name</label>
+                                <input type="text" name="job_name" class="form-control"
+                                       placeholder="job name">
+                            </div>
+                            <div class="form-group">
+                                <label>Spider type</label>
+                                <select class="form-control" name="spider_type">
+                                    <option label="关键词采集" value="关键词采集" selected="selected">关键词采集</option>
+                                    <option label="板块采集" value="板块采集">板块采集</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>startDate</label>
+                                <input class="form-control" name="startDate" type="date" />
+                            </div>
+                                <div class="form-group">
+                                <label>endDate</label>
+                                <input class="form-control" name="endDate" type="date" />
+                            </div>
+                            <div class="form-group">
                                 <label>Spider</label>
                                 <select class="form-control" name="spider_name">
                                     {% for spider in spider_list %}
@@ -121,6 +143,11 @@
                                 <label>Args</label>
                                 <input type="text" name="spider_arguments" class="form-control"
                                        placeholder="foo=1,bar=2">
+                            </div>
+                            <div class="form-group">
+                                <label>Tags</label>
+                                <input type="text" name="tags" class="form-control"
+                                       placeholder="tags">
                             </div>
                         </div>
                         <div class="col-md-6">
